@@ -23,9 +23,9 @@ def get_embedding(
 ) -> List[float]:
     """
 
-    :param text: str: 
+    :param text: str:
     :param model:  (Default value = "text-similarity-davinci-001")
-    :param **kwargs: 
+    :param **kwargs:
 
     """
     # replace newlines, which can negatively affect performance.
@@ -54,9 +54,9 @@ def get_embeddings(
 ) -> List[List[float]]:
     """
 
-    :param list_of_text: List[str]: 
+    :param list_of_text: List[str]:
     :param model:  (Default value = "text-similarity-babbage-001")
-    :param **kwargs: 
+    :param **kwargs:
 
     """
     assert len(list_of_text) <= 2048, "The batch size should not be larger than 2048."
@@ -86,8 +86,8 @@ async def aget_embeddings(
 def cosine_similarity(a, b):
     """
 
-    :param a: 
-    :param b: 
+    :param a:
+    :param b:
 
     """
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
@@ -97,13 +97,13 @@ def plot_multiclass_precision_recall(
     y_score, y_true_untransformed, class_list, classifier_name
 ):
     """Precision-Recall plotting for a multiclass problem. It plots average precision-recall, per class precision recall and reference f1 contours.
-    
+
     Code slightly modified, but heavily based on https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html
 
-    :param y_score: 
-    :param y_true_untransformed: 
-    :param class_list: 
-    :param classifier_name: 
+    :param y_score:
+    :param y_true_untransformed:
+    :param class_list:
+    :param classifier_name:
 
     """
     n_classes = len(class_list)
@@ -175,8 +175,8 @@ def distances_from_embeddings(
 ) -> List[List]:
     """
 
-    :param query_embedding: List[float]: 
-    :param embeddings: List[List[float]]: 
+    :param query_embedding: List[float]:
+    :param embeddings: List[List[float]]:
     :param distance_metric:  (Default value = "cosine")
 
     """
@@ -196,7 +196,7 @@ def distances_from_embeddings(
 def indices_of_nearest_neighbors_from_distances(distances) -> np.ndarray:
     """
 
-    :param distances: 
+    :param distances:
 
     """
     return np.argsort(distances)
@@ -207,7 +207,7 @@ def pca_components_from_embeddings(
 ) -> np.ndarray:
     """
 
-    :param embeddings: List[List[float]]: 
+    :param embeddings: List[List[float]]:
     :param n_components:  (Default value = 2)
 
     """
@@ -221,9 +221,9 @@ def tsne_components_from_embeddings(
 ) -> np.ndarray:
     """Returns t-SNE components of a list of embeddings.
 
-    :param embeddings: List[List[float]]: 
+    :param embeddings: List[List[float]]:
     :param n_components:  (Default value = 2)
-    :param **kwargs: 
+    :param **kwargs:
 
     """
     # use better defaults if not specified
@@ -247,13 +247,13 @@ def chart_from_components(
 ):
     """
 
-    :param components: np.ndarray: 
+    :param components: np.ndarray:
     :param labels: Optional[List[str]]:  (Default value = None)
     :param strings: Optional[List[str]]:  (Default value = None)
     :param x_title:  (Default value = "Component 0")
     :param y_title:  (Default value = "Component 1")
     :param mark_size:  (Default value = 5)
-    :param **kwargs: 
+    :param **kwargs:
 
     """
     empty_list = ["" for _ in components]
@@ -291,14 +291,14 @@ def chart_from_components_3D(
 ):
     """
 
-    :param components: np.ndarray: 
+    :param components: np.ndarray:
     :param labels: Optional[List[str]]:  (Default value = None)
     :param strings: Optional[List[str]]:  (Default value = None)
     :param x_title: str:  (Default value = "Component 0")
     :param y_title: str:  (Default value = "Component 1")
     :param z_title: str:  (Default value = "Compontent 2")
     :param mark_size: int:  (Default value = 5)
-    :param **kwargs: 
+    :param **kwargs:
 
     """
     empty_list = ["" for _ in components]
