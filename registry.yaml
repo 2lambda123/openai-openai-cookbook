@@ -183,7 +183,7 @@
 - title: "API Request Parallel Processor"
   path: "examples/api_request_parallel_processor.py"
   date: 2023-01-20
-  authors: 
+  authors:
     - "ted-at-openai"
   tags:
     - "completions"
