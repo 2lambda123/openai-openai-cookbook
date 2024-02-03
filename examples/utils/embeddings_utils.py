@@ -1,5 +1,6 @@
 import textwrap as tr
-from typing import List, Optional
+from typing import List
+from typing import Optional
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -9,8 +10,11 @@ import plotly.express as px
 from scipy import spatial
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
-from sklearn.metrics import average_precision_score, precision_recall_curve
-from tenacity import retry, stop_after_attempt, wait_random_exponential
+from sklearn.metrics import average_precision_score
+from sklearn.metrics import precision_recall_curve
+from tenacity import retry
+from tenacity import stop_after_attempt
+from tenacity import wait_random_exponential
 
 
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(6))
