@@ -15,8 +15,9 @@ import pandas as pd
 
 
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(6))
-def get_embedding(text: str, model="text-similarity-davinci-001", **kwargs) -> List[float]:
-
+def get_embedding(
+    text: str, model="text-similarity-davinci-001", **kwargs
+) -> List[float]:
     # replace newlines, which can negatively affect performance.
     text = text.replace("\n", " ")
 
@@ -29,27 +30,24 @@ def get_embedding(text: str, model="text-similarity-davinci-001", **kwargs) -> L
 async def aget_embedding(
     text: str, model="text-similarity-davinci-001", **kwargs
 ) -> List[float]:
-
     # replace newlines, which can negatively affect performance.
     text = text.replace("\n", " ")
 
-    return (await openai.embeddings.create(input=[text], model=model, **kwargs))["data"][0][
-        "embedding"
-    ]
+    return (await openai.embeddings.create(input=[text], model=model, **kwargs))[
+        "data"
+    ][0]["embedding"]
 
 
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(6))
 def get_embeddings(
     list_of_text: List[str], model="text-similarity-babbage-001", **kwargs
 ) -> List[List[float]]:
-    assert len(
-        list_of_text) <= 2048, "The batch size should not be larger than 2048."
+    assert len(list_of_text) <= 2048, "The batch size should not be larger than 2048."
 
     # replace newlines, which can negatively affect performance.
     list_of_text = [text.replace("\n", " ") for text in list_of_text]
 
-    data = openai.embeddings.create(
-        input=list_of_text, model=model, **kwargs).data
+    data = openai.embeddings.create(input=list_of_text, model=model, **kwargs).data
     return [d.embedding for d in data]
 
 
@@ -57,13 +55,14 @@ def get_embeddings(
 async def aget_embeddings(
     list_of_text: List[str], model="text-similarity-babbage-001", **kwargs
 ) -> List[List[float]]:
-    assert len(
-        list_of_text) <= 2048, "The batch size should not be larger than 2048."
+    assert len(list_of_text) <= 2048, "The batch size should not be larger than 2048."
 
     # replace newlines, which can negatively affect performance.
     list_of_text = [text.replace("\n", " ") for text in list_of_text]
 
-    data = (await openai.embeddings.create(input=list_of_text, model=model, **kwargs)).data
+    data = (
+        await openai.embeddings.create(input=list_of_text, model=model, **kwargs)
+    ).data
     return [d.embedding for d in data]
 
 
@@ -89,17 +88,14 @@ def plot_multiclass_precision_recall(
     recall = dict()
     average_precision = dict()
     for i in range(n_classes):
-        precision[i], recall[i], _ = precision_recall_curve(
-            y_true[:, i], y_score[:, i])
-        average_precision[i] = average_precision_score(
-            y_true[:, i], y_score[:, i])
+        precision[i], recall[i], _ = precision_recall_curve(y_true[:, i], y_score[:, i])
+        average_precision[i] = average_precision_score(y_true[:, i], y_score[:, i])
 
     # A "micro-average": quantifying score on all classes jointly
     precision_micro, recall_micro, _ = precision_recall_curve(
         y_true.ravel(), y_score.ravel()
     )
-    average_precision_micro = average_precision_score(
-        y_true, y_score, average="micro")
+    average_precision_micro = average_precision_score(y_true, y_score, average="micro")
     print(
         str(classifier_name)
         + " - Average precision score over all classes: {0:0.2f}".format(
@@ -123,8 +119,7 @@ def plot_multiclass_precision_recall(
     (l,) = plt.plot(recall_micro, precision_micro, color="gold", lw=2)
     lines.append(l)
     labels.append(
-        "average Precision-recall (auprc = {0:0.2f})" "".format(
-            average_precision_micro)
+        "average Precision-recall (auprc = {0:0.2f})" "".format(average_precision_micro)
     )
 
     for i in range(n_classes):
