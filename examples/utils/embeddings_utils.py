@@ -16,6 +16,16 @@ import pandas as pd
 
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(6))
 def get_embedding(text: str, engine="text-similarity-davinci-001", **kwargs) -> List[float]:
+    """Get embedding vector for text from OpenAI API
+    Args:
+        text: Text to get embedding for
+        engine: OpenAI engine to use (default "text-similarity-davinci-001")
+    Returns:
+        List[float]: Embedding vector for input text
+    - Replace newlines in text with spaces to avoid negatively affecting performance
+    - Call OpenAI Embedding API to get embedding for input text
+    - Return embedding vector from response data"""
+    
 
     # replace newlines, which can negatively affect performance.
     text = text.replace("\n", " ")
@@ -26,6 +36,16 @@ def get_embedding(text: str, engine="text-similarity-davinci-001", **kwargs) -> 
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(6))
 async def aget_embedding(
     text: str, engine="text-similarity-davinci-001", **kwargs
+    """Get embedding vector for text from Anthropic API
+    Args:
+        text: Text to get embedding for
+        engine: Name of model to use for embedding (default "text-similarity-davinci-001")
+    Returns:
+        List[float]: Embedding vector for input text
+    - Send text to Anthropic API Embedding endpoint
+    - Replace newlines in text which can negatively affect performance
+    - Return embedding vector from API response"""
+    
 ) -> List[float]:
 
     # replace newlines, which can negatively affect performance.
@@ -39,6 +59,19 @@ async def aget_embedding(
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(6))
 def get_embeddings(
     list_of_text: List[str], engine="text-similarity-babbage-001", **kwargs
+    """
+    Gets embeddings for a list of text strings
+    Args:
+        list_of_text: List of text strings to embed
+        engine: OpenAI API engine to use (default "text-similarity-babbage-001")
+    Returns:
+        List of embeddings: List of lists of floats representing embeddings
+    Processing Logic:
+        - Replace newlines in text, which can negatively affect performance
+        - Send text to OpenAI API to get embeddings
+        - Return embeddings from the API response
+    """
+    
 ) -> List[List[float]]:
     assert len(list_of_text) <= 2048, "The batch size should not be larger than 2048."
 
@@ -52,6 +85,18 @@ def get_embeddings(
 @retry(wait=wait_random_exponential(min=1, max=20), stop=stop_after_attempt(6))
 async def aget_embeddings(
     list_of_text: List[str], engine="text-similarity-babbage-001", **kwargs
+    """
+    Gets embeddings for a list of text from an OpenAI API engine.
+    Args:
+        list_of_text: List[str]: The list of text to get embeddings for
+    Returns:
+        List[List[float]]: The embeddings for each text in the list
+    Processing Logic:
+        - Replace newlines in text, which can negatively affect performance
+        - Send text to OpenAI Embedding API to get embeddings
+        - Return embeddings from the API response
+    """
+    
 ) -> List[List[float]]:
     assert len(list_of_text) <= 2048, "The batch size should not be larger than 2048."
 
@@ -63,6 +108,17 @@ async def aget_embeddings(
 
 
 def cosine_similarity(a, b):
+    """
+    Calculates the cosine similarity between two vectors.
+    Args:
+        a: First vector
+        b: Second vector
+    Returns:
+        cosine similarity: A float between -1 and 1 representing the cosine similarity.
+    - Normalize the two vectors by dividing each element by its magnitude
+    - Take the dot product of the two normalized vectors
+    - The dot product is the cosine of the angle between them and defines their similarity"""
+    
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 
