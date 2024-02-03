@@ -17,6 +17,13 @@ from tenacity import retry, stop_after_attempt, wait_random_exponential
 def get_embedding(
     text: str, engine="text-similarity-davinci-001", **kwargs
 ) -> List[float]:
+    """
+
+    :param text: str: 
+    :param engine:  (Default value = "text-similarity-davinci-001")
+    :param **kwargs: 
+
+    """
     # replace newlines, which can negatively affect performance.
     text = text.replace("\n", " ")
 
@@ -41,6 +48,13 @@ async def aget_embedding(
 def get_embeddings(
     list_of_text: List[str], engine="text-similarity-babbage-001", **kwargs
 ) -> List[List[float]]:
+    """
+
+    :param list_of_text: List[str]: 
+    :param engine:  (Default value = "text-similarity-babbage-001")
+    :param **kwargs: 
+
+    """
     assert len(list_of_text) <= 2048, "The batch size should not be larger than 2048."
 
     # replace newlines, which can negatively affect performance.
@@ -66,16 +80,27 @@ async def aget_embeddings(
 
 
 def cosine_similarity(a, b):
+    """
+
+    :param a: 
+    :param b: 
+
+    """
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 
 def plot_multiclass_precision_recall(
     y_score, y_true_untransformed, class_list, classifier_name
 ):
-    """
-    Precision-Recall plotting for a multiclass problem. It plots average precision-recall, per class precision recall and reference f1 contours.
-
+    """Precision-Recall plotting for a multiclass problem. It plots average precision-recall, per class precision recall and reference f1 contours.
+    
     Code slightly modified, but heavily based on https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html
+
+    :param y_score: 
+    :param y_true_untransformed: 
+    :param class_list: 
+    :param classifier_name: 
+
     """
     n_classes = len(class_list)
     y_true = pd.concat(
@@ -144,7 +169,13 @@ def distances_from_embeddings(
     embeddings: List[List[float]],
     distance_metric="cosine",
 ) -> List[List]:
-    """Return the distances between a query embedding and a list of embeddings."""
+    """
+
+    :param query_embedding: List[float]: 
+    :param embeddings: List[List[float]]: 
+    :param distance_metric:  (Default value = "cosine")
+
+    """
     distance_metrics = {
         "cosine": spatial.distance.cosine,
         "L1": spatial.distance.cityblock,
@@ -159,14 +190,23 @@ def distances_from_embeddings(
 
 
 def indices_of_nearest_neighbors_from_distances(distances) -> np.ndarray:
-    """Return a list of indices of nearest neighbors from a list of distances."""
+    """
+
+    :param distances: 
+
+    """
     return np.argsort(distances)
 
 
 def pca_components_from_embeddings(
     embeddings: List[List[float]], n_components=2
 ) -> np.ndarray:
-    """Return the PCA components of a list of embeddings."""
+    """
+
+    :param embeddings: List[List[float]]: 
+    :param n_components:  (Default value = 2)
+
+    """
     pca = PCA(n_components=n_components)
     array_of_embeddings = np.array(embeddings)
     return pca.fit_transform(array_of_embeddings)
@@ -175,7 +215,13 @@ def pca_components_from_embeddings(
 def tsne_components_from_embeddings(
     embeddings: List[List[float]], n_components=2, **kwargs
 ) -> np.ndarray:
-    """Returns t-SNE components of a list of embeddings."""
+    """Returns t-SNE components of a list of embeddings.
+
+    :param embeddings: List[List[float]]: 
+    :param n_components:  (Default value = 2)
+    :param **kwargs: 
+
+    """
     # use better defaults if not specified
     if "init" not in kwargs.keys():
         kwargs["init"] = "pca"
@@ -195,7 +241,17 @@ def chart_from_components(
     mark_size=5,
     **kwargs,
 ):
-    """Return an interactive 2D chart of embedding components."""
+    """
+
+    :param components: np.ndarray: 
+    :param labels: Optional[List[str]]:  (Default value = None)
+    :param strings: Optional[List[str]]:  (Default value = None)
+    :param x_title:  (Default value = "Component 0")
+    :param y_title:  (Default value = "Component 1")
+    :param mark_size:  (Default value = 5)
+    :param **kwargs: 
+
+    """
     empty_list = ["" for _ in components]
     data = pd.DataFrame(
         {
@@ -229,7 +285,18 @@ def chart_from_components_3D(
     mark_size: int = 5,
     **kwargs,
 ):
-    """Return an interactive 3D chart of embedding components."""
+    """
+
+    :param components: np.ndarray: 
+    :param labels: Optional[List[str]]:  (Default value = None)
+    :param strings: Optional[List[str]]:  (Default value = None)
+    :param x_title: str:  (Default value = "Component 0")
+    :param y_title: str:  (Default value = "Component 1")
+    :param z_title: str:  (Default value = "Compontent 2")
+    :param mark_size: int:  (Default value = 5)
+    :param **kwargs: 
+
+    """
     empty_list = ["" for _ in components]
     data = pd.DataFrame(
         {
