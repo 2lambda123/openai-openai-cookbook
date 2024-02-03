@@ -26,11 +26,11 @@ The following examples show how easily OpenAI and DataStax Astra DB can
 work together to power vector-based AI applications. You can run them either
 with your local Jupyter engine or as Colab notebooks:
 
-| Use case | Target database | Framework | Notebook | Google Colab |
-| -------- | --------------- | --------- | -------- | ------------ |
-| Search/generate quotes | Astra DB | AstraPy | [Notebook](./Philosophical_Quotes_AstraPy.ipynb) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/openai/openai-cookbook/blob/main/examples/vector_databases/cassandra_astradb/Philosophical_Quotes_AstraPy.ipynb) |
-| Search/generate quotes | Cassandra / Astra DB through CQL | CassIO | [Notebook](./Philosophical_Quotes_cassIO.ipynb) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/openai/openai-cookbook/blob/main/examples/vector_databases/cassandra_astradb/Philosophical_Quotes_cassIO.ipynb) |
-| Search/generate quotes | Cassandra / Astra DB through CQL | Plain Cassandra language | [Notebook](./Philosophical_Quotes_CQL.ipynb) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/openai/openai-cookbook/blob/main/examples/vector_databases/cassandra_astradb/Philosophical_Quotes_CQL.ipynb) |
+| Use case               | Target database                  | Framework                | Notebook                                         | Google Colab                                                                                                                                                                                                                   |
+| ---------------------- | -------------------------------- | ------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Search/generate quotes | Astra DB                         | AstraPy                  | [Notebook](./Philosophical_Quotes_AstraPy.ipynb) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/openai/openai-cookbook/blob/main/examples/vector_databases/cassandra_astradb/Philosophical_Quotes_AstraPy.ipynb) |
+| Search/generate quotes | Cassandra / Astra DB through CQL | CassIO                   | [Notebook](./Philosophical_Quotes_cassIO.ipynb)  | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/openai/openai-cookbook/blob/main/examples/vector_databases/cassandra_astradb/Philosophical_Quotes_cassIO.ipynb)  |
+| Search/generate quotes | Cassandra / Astra DB through CQL | Plain Cassandra language | [Notebook](./Philosophical_Quotes_CQL.ipynb)     | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/openai/openai-cookbook/blob/main/examples/vector_databases/cassandra_astradb/Philosophical_Quotes_CQL.ipynb)     |
 
 ### Vector similarity, visual representation
 

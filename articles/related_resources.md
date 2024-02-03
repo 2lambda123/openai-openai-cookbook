@@ -42,7 +42,6 @@ People are writing great tools and papers for improving outputs from GPT. Here a
 - [Prompt Engineering by DAIR.AI](https://www.youtube.com/watch?v=dOxUroR57xs): A one-hour video on various prompt engineering techniques.
 - [Scrimba course about Assistants API](https://scrimba.com/learn/openaiassistants): A 30-minute interactive course about the Assistants API.
 
-
 ## Papers on advanced prompting to improve reasoning
 
 - [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (2022)](https://arxiv.org/abs/2201.11903): Using few-shot prompts to ask models to think step by step improves their reasoning. PaLM's score on math word problems (GSM8K) rises from 18% to 57%.
